@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:texly_app/alerts/alert_box.dart';
+import 'package:texly_app/bottom_sheets/passangers_sheet.dart';
 import 'package:texly_app/screens/ride.dart';
 
 class Home extends StatefulWidget {
@@ -23,6 +24,16 @@ class _HomeState extends State<Home> {
     setState(() {
       isCardTapped = !isCardTapped;
     });
+  }
+
+  void _showModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Passengersheet(
+        ); // Use the imported widget here
+      },
+    );
   }
 
   @override
@@ -280,15 +291,22 @@ class _HomeState extends State<Home> {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 30),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Number of Passengers',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+
+                    onTap: () {
+                      
+                      _showModalBottomSheet(context);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 30),
+                      child: const TextField(
+                        decoration: InputDecoration(
+                          label: Text(
+                            'Number of Passengers',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -364,18 +382,20 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            BottomNavigationBar(items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.add_rounded,
-                  ),
-                  label: 'Add'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.check_box_outlined,
-                  ),
-                  label: 'To-Do')
-            ])
+            BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.add_rounded,
+                    ),
+                    label: 'Add'),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.check_box_outlined,
+                    ),
+                    label: 'To-Do')
+              ],
+            ),
           ],
         ),
       ),
